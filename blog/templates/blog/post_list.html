@@ -1,75 +1,13 @@
-<!DOCTYPE html>
-<html>
-<title>Fifu's Blog</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-</style>
-<body class="w3-light-grey">
+{% extends 'blog/base.html' %}
 
-<!-- w3-content defines a container for fixed size centered content,
-and is wrapped around the whole page content, except for the footer in this example -->
-<div class="w3-content" style="max-width:1400px">
-
-<!-- Header -->
-<header class="w3-container w3-center w3-padding-32">
-  <h1><b>FIFU'S BLOG</b></h1>
-  <p>Welcome to the blog of <span class="w3-tag">FIFU</span></p>
-</header>
-
-<!-- Grid -->
-<div class="w3-row">
+{% block content %}
 {% for post in posts %}
-<!-- Blog entries -->
-<div class="w3-col 20 s12">
-  <!-- Blog entry -->
-  <div class="w3-card-4 w3-margin w3-white">
-    <img src="/w3images/woods.jpg" alt="Nature" style="width:100%">
-    <div class="w3-container">
-      <h3><b>{{ post.title }}</b></h3>
-      <h5>{{ post.text }}, <span class="w3-opacity">{{ post.created_date }}</span></h5>
+    <div class="post">
+        <div class="date">
+            {{ post.published_date }}
+        </div>
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
     </div>
-
-
-    </div>
-  </div>
-    {% endfor %}
-  <hr>
-
-  <!-- Blog entry -->
-
-
-
-    </div>
-  </div>
-<!-- END BLOG ENTRIES -->
-</div>
-
-
-
-
-  <hr>
-
-
-
-<!-- END Introduction Menu -->
-</div>
-
-<!-- END GRID -->
-</div><br>
-
-<!-- END w3-content -->
-</div>
-
-<!-- Footer -->
-<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-  <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Previous</button>
-  <button class="w3-button w3-black w3-padding-large w3-margin-bottom">Next »</button>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
-
-</body>
-</html>
+{% endfor %}
+{% endblock %}
